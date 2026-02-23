@@ -6,4 +6,3 @@ set -e
 # For now, we start the Gradio app directly
 echo "Starting Gradio PDF GPT on port 7860..."
 python /app/app.py
-

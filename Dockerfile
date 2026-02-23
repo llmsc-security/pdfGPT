@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # Use an official Python image based on Debian Bullseye
-FROM python:3.8-slim-bullseye
+FROM python:3.10-slim
 
 # ---------------------------------------------------------------------------
 # Global environment
@@ -33,9 +33,9 @@ WORKDIR /app
 # Install Python dependencies
 # ---------------------------------------------------------------------------
 COPY requirements.txt .
-RUN pip install --upgrade pip setuptools wheel && \
-    pip install --no-cache-dir --prefer-binary -r requirements.txt && \
-    pip install --no-cache-dir --prefer-binary "langchain-serve[api]"
+RUN pip install --upgrade pip && \
+    # Install gradio and other packages (langchain-serve removed due to dependency conflicts)
+    pip install --no-cache-dir --prefer-binary gradio openai litellm PyMuPDF numpy scikit-learn tensorflow tensorflow_hub wheel
 
 # ---------------------------------------------------------------------------
 # Copy application source

@@ -78,7 +78,7 @@ with gr.Blocks() as demo:
             )
             question = gr.Textbox(label='Enter your question here')
             btn = gr.Button(value='Submit')
-            btn.style(full_width=True)
+            btn.full_width = True
 
         with gr.Group():
             answer = gr.Textbox(label='The answer to your question is :')
@@ -89,6 +89,8 @@ with gr.Blocks() as demo:
             outputs=[answer],
         )
 
-demo.app.server.timeout = 60000 # Set the maximum return time for the results of accessing the upstream server
+# demo.server.timeout = 60000 # Set the maximum return time for the results of accessing the upstream server
 
-demo.launch(server_port=7860, enable_queue=True) # `enable_queue=True` to ensure the validity of multi-user requests
+if __name__ == "__main__":
+    # Only launch when run as main script
+    demo.launch(server_port=7860, share=False, quiet=True, server_name='0.0.0.0') # Launch Gradio interface
